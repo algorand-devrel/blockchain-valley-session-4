@@ -1,43 +1,68 @@
 {
-  "version": "0.2.0",
   "configurations": [
     {
-      "name": "Build & Deploy contracts",
+      "type": "msedge",
+      "request": "launch",
+      "name": "Run (Edge)",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}",
+      "presentation": {
+        "hidden": false,
+        "group": "2. Web"
+      }
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Run (Chrome)",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}",
+      "presentation": {
+        "hidden": false,
+        "group": "2. Web"
+      }
+    },
+    {
+      "type": "firefox",
+      "request": "launch",
+      "name": "Run (Firefox)",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}",
+      "presentation": {
+        "hidden": false,
+        "group": "2. Web"
+      }
+    },
+    {
+      "name": "Run dApp",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "deploy"],
-      "cwd": "${workspaceFolder}/smart_contracts",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
-      "preLaunchTask": "Build contracts (+ LocalNet)",
-      "envFile": "${workspaceFolder}/.env.localnet"
+      "presentation": {
+        "hidden": false,
+        "group": "1. Run Project",
+        "order": 1
+      }
     },
     {
-      "name": "Deploy contracts",
+      "name": "Run dApp (+ LocalNet)",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "deploy"],
-      "cwd": "${workspaceFolder}/smart_contracts",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
       "skipFiles": ["<node_internals>/**", "node_modules/**"],
-      "envFile": "${workspaceFolder}/.env.localnet"
-    },
-    {
-      "name": "Build contracts",
-      "type": "python",
-      "request": "launch",
-      "module": "smart_contracts",
-      "args": ["build"],
-      "cwd": "${workspaceFolder}"
-    },    
-    {
-      "type": "avm",
-      "request": "launch",
-      "name": "Debug TEAL via AlgoKit AVM Debugger",
-      "simulateTraceFile": "${workspaceFolder}/${command:PickSimulateTraceFile}",
-      "stopOnEntry": true
+      "preLaunchTask": "Start AlgoKit LocalNet",
+      "presentation": {
+        "hidden": false,
+        "group": "1. Run Project",
+        "order": 1
+      }
     }
   ]
 }

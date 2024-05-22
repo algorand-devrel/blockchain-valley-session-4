@@ -1,10 +1,14 @@
 {
   "recommendations": [
-    "ms-python.python",
+    "EditorConfig.EditorConfig",
+    "dotenv.dotenv-vscode",
     "esbenp.prettier-vscode",
-    "tamasfe.even-better-toml",
-    "editorconfig.editorconfig",
-    "vsls-contrib.codetour",
-    "algorandfoundation.algokit-avm-vscode-debugger"
-  ]
+    "dbaeumer.vscode-eslint",
+    "krysenlo.vite-plugin-eslint-problemmatcher",
+    "ms-playwright.playwright",
+    "Orta.vscode-jest",
+    "bradlc.vscode-tailwindcss",
+    "csstools.postcss",
+    ]
 }
+
