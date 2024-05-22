@@ -60,9 +60,8 @@ export function create(
     */
 
     // 문제 2 시작
-    const createResult = '여기에 코드 작성'
+    const createResult = await dmClient.create.bare()
     // 문제 2 끝
-
     /*
     문제 3
     부트스트랩 메서드는 앱이 필요한 미니멈 밸런스를 지급하고 앱이 판매할 NFT 에셋에 옵트인하는 메서드입니다.
@@ -76,17 +75,14 @@ export function create(
     힌트1: AlgoAmount 설정하는 방법: https://github.com/algorandfoundation/algokit-utils-ts/blob/e9682db133fab42627648ac2f779cd91f3e6cd21/docs/capabilities/amount.md#creating-an-algoamount
     힌트2: 앱 클라이언트 메서드 호출때 메서드 전달값 넣는법: https://github.com/algorandfoundation/algokit-client-generator-ts/blob/main/docs/usage.md#abi-arguments
     */
-
-    // 문제 3 시작
     const mbrTxn = await algorand.transactions.payment({
       sender,
       receiver: createResult.appAddress,
       amount: algokit.algos(0.1 + 0.1),
-      extraFee: '여기에 코드 작성',
+      extraFee: algokit.algos(0.001),
     })
 
-    ;('여기에 bootstrap 메서드 호출 코드 작성')
-    // 문제 3 끝
+    await dmClient.bootstrap({ asset: assetId, unitaryPrice, mbrPay: mbrTxn })
 
     await algorand.send.assetTransfer({
       assetId,
@@ -121,17 +117,17 @@ export function buy(
     힌트1: AlgoAmount 설정하는 방법: https://github.com/algorandfoundation/algokit-utils-ts/blob/e9682db133fab42627648ac2f779cd91f3e6cd21/docs/capabilities/amount.md#creating-an-algoamount
     힌트2: 앱 클라이언트 메서드 호출때 메서드 전달값 넣는법: https://github.com/algorandfoundation/algokit-client-generator-ts/blob/main/docs/usage.md#abi-arguments
     */
-
-    // 문제 4 시작
     const buyerTxn = await algorand.transactions.payment({
       sender,
       receiver: appAddress,
       amount: algokit.microAlgos(Number(quantity * unitaryPrice)),
-      extraFee: '여기에 코드 작성',
+      extraFee: algokit.algos(0.001),
     })
 
-    ;('여기에 buy 메서드 호출 코드 작성')
-    // 문제 4 끝
+    await dmClient.buy({
+      buyerTxn,
+      quantity,
+    })
 
     const state = await dmClient.getGlobalState()
     const info = await algorand.account.getAssetInformation(appAddress, state.assetId!.asBigInt())
@@ -168,10 +164,7 @@ export function deleteApp(dmClient: DigitalMarketplaceClient, setAppId: (id: num
     힌트4: AlgoAmount 설정하는 방법: https://github.com/algorandfoundation/algokit-utils-ts/blob/e9682db133fab42627648ac2f779cd91f3e6cd21/docs/capabilities/amount.md#creating-an-algoamount
     힌트5: 다 시도해보고 모르겠을때 보세요!: https://github.com/algorand-devrel/blockchain-valley-session-2/blob/df789308e76a5a6cb3c815b256779fb197add8fd/projects/coding-assignment/smart_contracts/digital_marketplace/deploy-config.ts#L70C1-L74C4
     */
-
-    // 문제 5 시작
-    '여기에 코드 작성'
-    // 문제 5 끝
+    await dmClient.delete.withdrawAndDelete({}, { sendParams: { fee: algokit.algos(0.003) } })
     setAppId(0)
   }
 }

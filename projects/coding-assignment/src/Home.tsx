@@ -6,6 +6,7 @@ import algosdk from 'algosdk'
 import React, { useEffect, useState } from 'react'
 import ConnectWallet from './components/ConnectWallet'
 import MethodCall from './components/MethodCall'
+import { DigitalMarketplaceClient } from './contracts/DigitalMarketplace'
 import * as methods from './methods'
 import { getAlgodConfigFromViteEnvironment } from './utils/network/getAlgoClientConfigs'
 
@@ -74,7 +75,6 @@ const Home: React.FC<HomeProps> = () => {
   - 단점: 앱 아이디를 알아야하기 때문에 네트워크가 바뀔때 코드를 바꿔줘야할 수 있습니다.
 
   주목!!!
-  - 이 파일 맨 위에 이 코드를 복붙해 마켓플레이스 앱 클라이언트 class를 import하세요: import { DigitalMarketplaceClient } from './contracts/DigitalMarketplace'
   - 여기서는 resolve by id를 사용해주세요!
   - sender값에는 { addr: activeAddress!, signer }를 복붙해주세요. useWallet를 통해 현재 연결된 지갑 주소와 서명자를 사용하는 코드입니다.
 
@@ -82,7 +82,14 @@ const Home: React.FC<HomeProps> = () => {
   */
 
   // 문제 1 시작
-  const dmClient = '여기에 코드 작성'
+  const dmClient = new DigitalMarketplaceClient(
+    {
+      resolveBy: 'id',
+      id: appId,
+      sender: { addr: activeAddress!, signer },
+    },
+    algorand.client.algod,
+  )
   // 문제 1 끝
 
   const toggleWalletModal = () => {
