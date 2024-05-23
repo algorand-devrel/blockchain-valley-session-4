@@ -77,6 +77,7 @@ const Home: React.FC<HomeProps> = () => {
   - 이 파일 맨 위에 이 코드를 복붙해 마켓플레이스 앱 클라이언트 class를 import하세요: import { DigitalMarketplaceClient } from './contracts/DigitalMarketplace'
   - 여기서는 resolve by id를 사용해주세요!
   - sender값에는 { addr: activeAddress!, signer }를 복붙해주세요. useWallet를 통해 현재 연결된 지갑 주소와 서명자를 사용하는 코드입니다.
+  - 앱 클라이언트 인스턴스 만들때 두번째 전달값인 algod는 algorand client 안에 있습니다. 라인 43 참고.
 
   힌트: https://github.com/algorandfoundation/algokit-client-generator-ts/blob/main/docs/usage.md#creating-an-application-client-instance
   */

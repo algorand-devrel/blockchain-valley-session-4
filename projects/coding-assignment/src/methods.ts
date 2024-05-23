@@ -71,7 +71,10 @@ export function create(
     부트스트랩 메서드는 호출 시 판매할 NFT에 옵트인하는 inner transaction이 있습니다.
     따라서 부트스트랩 메서드 호출자가 inner transaction의 트랜잭션 비용을 내야합니다.
     이 부분은 mbrTxn안에 extraFee를 통해서 설정을 해주면 됩니다. 이때 extraFee는 AlgoAmount 데이터타입을 받습니다!!
-    알고랜드의 트랜잭션 비용은 0.001 Algos입니다.
+    extra fee 비용은 0.001 Algos입니다.
+
+    부트스트랩 메서드의 전달값을 확인할려면 digital-marketplace-contract 프로젝트 폴더 안에
+    smart_contracts/digital_marketplace/contract.py 파일을 확인해주세요.
 
     힌트1: AlgoAmount 설정하는 방법: https://github.com/algorandfoundation/algokit-utils-ts/blob/e9682db133fab42627648ac2f779cd91f3e6cd21/docs/capabilities/amount.md#creating-an-algoamount
     힌트2: 앱 클라이언트 메서드 호출때 메서드 전달값 넣는법: https://github.com/algorandfoundation/algokit-client-generator-ts/blob/main/docs/usage.md#abi-arguments
@@ -116,7 +119,7 @@ export function buy(
     buy 메서드는 호출 시 스마트 계약에 있는 NFT를 구매자 지갑으로 보내주는 inner transaction이 있습니다.
     따라서 buy 메서드 호출자가 inner transaction의 트랜잭션 비용을 내야합니다.
     이 부분은 buyerTxn안에 extraFee를 통해서 설정을 해주면 됩니다. 이때 extraFee는 AlgoAmount 데이터타입을 받습니다!!
-    알고랜드의 트랜잭션 비용은 0.001 Algos입니다.
+    extra fee 비용은 0.001 Algos입니다.
 
     힌트1: AlgoAmount 설정하는 방법: https://github.com/algorandfoundation/algokit-utils-ts/blob/e9682db133fab42627648ac2f779cd91f3e6cd21/docs/capabilities/amount.md#creating-an-algoamount
     힌트2: 앱 클라이언트 메서드 호출때 메서드 전달값 넣는법: https://github.com/algorandfoundation/algokit-client-generator-ts/blob/main/docs/usage.md#abi-arguments
