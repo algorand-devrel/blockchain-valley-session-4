@@ -6,6 +6,7 @@ import algosdk from 'algosdk'
 import React, { useEffect, useState } from 'react'
 import ConnectWallet from './components/ConnectWallet'
 import MethodCall from './components/MethodCall'
+import { DigitalMarketplaceClient } from './contracts/DigitalMarketplace'
 import * as methods from './methods'
 import { getAlgodConfigFromViteEnvironment } from './utils/network/getAlgoClientConfigs'
 
@@ -13,7 +14,6 @@ interface HomeProps {}
 
 const Home: React.FC<HomeProps> = () => {
   AlgokitConfig.configure({ populateAppCallResources: true })
-
   const [openWalletModal, setOpenWalletModal] = useState<boolean>(false)
   const [appId, setAppId] = useState<number>(0)
   const [assetId, setAssetId] = useState<bigint>(0n)
@@ -83,7 +83,16 @@ const Home: React.FC<HomeProps> = () => {
   */
 
   // 문제 1 시작
-  const dmClient = '여기에 코드 작성'
+  const dmClient = new DigitalMarketplaceClient(
+    {
+      resolveBy: 'id',
+      id: appId,
+      sender: { addr: activeAddress!, signer },
+      name: 'AlternativeName',
+    },
+    algorand.client.algod,
+  )
+
   // 문제 1 끝
 
   const toggleWalletModal = () => {
