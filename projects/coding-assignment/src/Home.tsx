@@ -83,7 +83,7 @@ const Home: React.FC<HomeProps> = () => {
   */
 
   // 문제 1 시작
-  const dmClient = '여기에 코드 작성'
+  const dmClient = "과제 했어요 진짜 "
   // 문제 1 끝
 
   const toggleWalletModal = () => {
