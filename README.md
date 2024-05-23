@@ -63,9 +63,6 @@ git clone [FORKED_REPO_URL]
 algokit project bootstrap all
 ```
 
-6. 이제 `coding-assignment` 터미널을 선택한 뒤 `poetry shell` 커맨드를 실행해 파이썬 virtual environment를 활성화 시켜주세요.
-   1. 파이썬 virtual environment를 비활성화 시킬때는 `exit` 커맨드를 실행하시면 됩니다.
-
 리포 fork, clone 튜토리얼:
 https://github.com/algorand-fix-the-bug-campaign/challenge-1/assets/52557585/acde8053-a8dd-4f53-8bad-45de1068bfda
 
