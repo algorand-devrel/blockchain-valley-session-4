@@ -6,6 +6,7 @@ import algosdk from 'algosdk'
 import React, { useEffect, useState } from 'react'
 import ConnectWallet from './components/ConnectWallet'
 import MethodCall from './components/MethodCall'
+import { DigitalMarketplaceClient } from './contracts/DigitalMarketplace'
 import * as methods from './methods'
 import { getAlgodConfigFromViteEnvironment } from './utils/network/getAlgoClientConfigs'
 
@@ -83,12 +84,22 @@ const Home: React.FC<HomeProps> = () => {
   */
 
   // 문제 1 시작
-  const dmClient = '여기에 코드 작성'
-  // 문제 1 끝
 
   const toggleWalletModal = () => {
     setOpenWalletModal(!openWalletModal)
   }
+
+  const dmClient = new DigitalMarketplaceClient(
+    {
+      resolveBy: 'id',
+      // The unique id of an already deployed smart contract, or 0 if the smart contract has not been deployed
+      id: appId,
+      // Optionally specify a default sender for all calls made from the client
+      sender: { addr: activeAddress!, signer },
+    },
+    // An algod client is required to make the underlying calls to the network
+    algorand.client.algod,
+  )
 
   return (
     <div className="hero min-h-screen bg-teal-400">
