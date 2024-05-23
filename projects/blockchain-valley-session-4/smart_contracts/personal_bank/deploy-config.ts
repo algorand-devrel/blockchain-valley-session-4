@@ -12,7 +12,7 @@ export async function deploy() {
   const algorand = algokit.AlgorandClient.defaultLocalNet()
 
   // 랜덤 계정 생성 후 자금 지급
-  const deployer = await algorand.account.random()
+  const deployer = await algorand.account.random() //은행 계정
   const user = await algorand.account.random()
   const user2 = await algorand.account.random()
   const accounts = [deployer, user, user2]
@@ -32,7 +32,7 @@ export async function deploy() {
   //1. Deployer의 Personal Bank 앱 클라이언트 생성
   const appClient = new PersonalBankClient(
     {
-      resolveBy: 'creatorAndName',
+      resolveBy: 'creatorAndName', //배포자의 계정 주소랑 이름으로 찾음.
       findExistingUsing: indexer,
       sender: deployer,
       creatorAddress: deployer.addr,
@@ -96,8 +96,9 @@ export async function deploy() {
       첫번째 전달값으로 넣어주면 자동으로 어토믹 그룹으로 묶어줍니다.
    
    */
+    // compose를 하면 줄줄이 소시지로 연결 가능
     await appClient.compose().optIn.optInToApp({}).deposit({ ptxn: depositTxn }).execute({ suppressLog: true })
-
+    // suppress log = True를 하면 로그가 뜨는 걸 막을 수 있음.
     console.log(`=== ${userName} 출금 전 ===`)
 
     let appInfo = await algorand.account.getInformation(app.appAddress)
@@ -118,7 +119,7 @@ export async function deploy() {
     userName: string,
     user: TransactionSignerAccount,
   ): Promise<void> {
-    await appClient.closeOut.withdraw({}, { sendParams: { fee: algokit.transactionFees(2) } })
+    await appClient.closeOut.withdraw({}, { sendParams: { fee: algokit.transactionFees(2) } }) //여기서 fee 설정
 
     console.log(`=== ${userName} 출금 후 ===`)
     const appInfo = await algorand.account.getInformation(app.appAddress)

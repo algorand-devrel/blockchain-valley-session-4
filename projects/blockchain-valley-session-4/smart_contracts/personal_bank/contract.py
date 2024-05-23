@@ -43,7 +43,7 @@ class PersonalBank(ARC4Contract):
             receiver=Txn.sender,
             sender=Global.current_application_address,
             amount=userBalance,
-            fee=0,
+            fee=0, #여기서는 0으로 하고 호출자가 낼 수 있게 로직을 설정해주기.
         ).submit()
 
         return userBalance
