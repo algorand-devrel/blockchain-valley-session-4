@@ -60,7 +60,7 @@ export function create(
     */
 
     // 문제 2 시작
-    const createResult = '여기에 코드 작성'
+    const createResult = await dmClient.create.bare()
     // 문제 2 끝
 
     /*
@@ -85,10 +85,14 @@ export function create(
       sender,
       receiver: createResult.appAddress,
       amount: algokit.algos(0.1 + 0.1),
-      extraFee: '여기에 코드 작성',
+      extraFee: algokit.algos(0.001),
     })
 
-    ;('여기에 bootstrap 메서드 호출 코드 작성')
+    await dmClient.bootstrap({
+      asset: assetId,
+      unitaryPrice: unitaryPrice,
+      mbrPay: mbrTxn,
+    })
     // 문제 3 끝
 
     await algorand.send.assetTransfer({
@@ -130,10 +134,13 @@ export function buy(
       sender,
       receiver: appAddress,
       amount: algokit.microAlgos(Number(quantity * unitaryPrice)),
-      extraFee: '여기에 코드 작성',
+      extraFee: algokit.algos(0.001),
     })
 
-    ;('여기에 buy 메서드 호출 코드 작성')
+    await dmClient.buy({
+      buyerTxn: buyerTxn,
+      quantity: quantity,
+    })
     // 문제 4 끝
 
     const state = await dmClient.getGlobalState()
@@ -173,7 +180,7 @@ export function deleteApp(dmClient: DigitalMarketplaceClient, setAppId: (id: num
     */
 
     // 문제 5 시작
-    '여기에 코드 작성'
+    await dmClient.delete.withdrawAndDelete({}, { sendParams: { fee: algokit.transactionFees(3) } })
     // 문제 5 끝
     setAppId(0)
   }
